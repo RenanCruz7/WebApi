@@ -1,7 +1,19 @@
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
+using WebApiDemo.Data;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Conexão com o Banco de dados
+var connectionString = builder.Configuration.GetConnectionString("PostConnection");
 
+builder.Services.AddDbContext<PostContext>(opts =>
+    opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+
+
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -9,6 +9,7 @@ public class PostController : ControllerBase
 {
     private static List<Post> posts = new List<Post>();
 
+    [HttpPost]
     public void CreatePost([FromBody] Post post)
     {
         posts.Add(post);
